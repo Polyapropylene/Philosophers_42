@@ -2,7 +2,8 @@ NAME = philo
 
 SRCS = main.c\
 	init.c\
-	utils.c
+	utils.c\
+	philo.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

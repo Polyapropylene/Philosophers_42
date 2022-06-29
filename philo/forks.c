@@ -6,13 +6,13 @@
 /*   By: rrhyhorn <rrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:53:24 by rrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/27 16:59:57 by rrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:47:37 by rrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_forks(t_philo *data)
+int	init_forks(t_data *data)
 {
 	int	i;
 

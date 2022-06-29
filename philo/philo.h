@@ -6,7 +6,7 @@
 /*   By: rrhyhorn <rrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:31:20 by rrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/27 19:33:12 by rrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/29 18:00:59 by rrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,36 @@
 # include <stdlib.h>
 # include <sys/time.h>
 
-struct timeval {
+struct timeval 
+{
    time_t      tv_sec;
    suseconds_t tv_usec;
 };
 
-typedef struct s_philo
+typedef	struct s_philo
+{
+	int	id;
+	int	times_has_eaten;
+} t_philo;
+
+typedef struct s_data
 {
 	int				num_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				times_philo_must_eat;
-	pthread_mutex_t	print_mutex;
-	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	*print_mutex;
+	pthread_mutex_t	*death_mutex;
 	pthread_mutex_t	*fork_mutex;
-	int				times_has_eaten;
 	long			time;
-} t_philo;
+	t_philo			philo;
+} t_data;
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 void	my_usleep(size_t time);
 int		get_current_time(void);
-int		init_philo(int argc, char **argv, t_philo *data);
-void	philo_lifes(t_philo *data);
+int		init_philo(int argc, char **argv, t_data *data);
+void	*philo_lifes(t_data *data);
 #endif
