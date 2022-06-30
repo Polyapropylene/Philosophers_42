@@ -6,7 +6,7 @@
 /*   By: rrhyhorn <rrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:31:08 by rrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/29 17:07:26 by rrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:17:34 by rrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int	init_philo(int argc, char **argv, t_data *data)
 {
 	if (check_args(argc, argv) == 0)
 		return (1);
-	data = (t_data *) malloc(sizeof(t_data));
-	if (!data)
-		return (1);
 	data->num_of_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
@@ -49,9 +46,9 @@ int	init_philo(int argc, char **argv, t_data *data)
 		data->times_philo_must_eat = -1;
 	data->print_mutex = malloc(sizeof(pthread_mutex_t));
 	data->death_mutex = malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(&data->print_mutex, NULL))
+	if (pthread_mutex_init(data->print_mutex, NULL))
 		return (1);
-	if (pthread_mutex_init(&data->death_mutex, NULL))
+	if (pthread_mutex_init(data->death_mutex, NULL))
 		return (1);
 	return (0);
 }

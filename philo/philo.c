@@ -6,13 +6,13 @@
 /*   By: rrhyhorn <rrhyhorn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:17:06 by rrhyhorn          #+#    #+#             */
-/*   Updated: 2022/06/29 18:00:45 by rrhyhorn         ###   ########.fr       */
+/*   Updated: 2022/06/29 18:26:04 by rrhyhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_sleep(t_data *data, size_t start_time)
+void	philo_sleep(t_data *data, long start_time)
 {
 	pthread_mutex_lock(data->print_mutex);
 	printf("%ld %d is sleeping", get_current_time() - start_time, data->philo.id);
@@ -20,7 +20,7 @@ void	philo_sleep(t_data *data, size_t start_time)
 	my_usleep(data->time_to_sleep);
 }
 
-void	philo_eat(t_data *data, size_t start_time)
+void	philo_eat(t_data *data, long start_time)
 {
 	pthread_mutex_lock(data->print_mutex);
 	printf("%ld %d is eating", get_current_time() - start_time, data->philo.id);
@@ -29,7 +29,7 @@ void	philo_eat(t_data *data, size_t start_time)
 	my_usleep(data->time_to_eat);
 }
 
-int	check_is_alive(t_data *data, size_t start_time)
+int	check_is_alive(t_data *data, long start_time)
 {
 	pthread_mutex_lock(data->death_mutex);
 	if((get_current_time() - start_time) > (data->time_to_die))
@@ -43,10 +43,12 @@ int	check_is_alive(t_data *data, size_t start_time)
 	return (0);
 }
 
-void	*philo_lifes(t_data *data)
+void	*philo_lifes(void *data1)
 {
-	size_t	start_time;
+	long	start_time;
+	t_data	*data;
 
+	data = (t_data *)data1;
 	start_time = get_current_time();
 	data->philo.times_has_eaten = 0;
 	while (!check_is_alive(data, start_time))
@@ -57,5 +59,7 @@ void	*philo_lifes(t_data *data)
 		philo_sleep(data, start_time);
 		pthread_mutex_lock(data->print_mutex);
 		printf("%ld %d is thinking", get_current_time() - start_time, data->philo.id);
+		pthread_mutex_unlock(data->print_mutex);
 	}
+	return NULL;
 }
