@@ -1,9 +1,10 @@
 NAME = philo
 
-SRCS = main.c\
-	init.c\
+SRCS = philo.c\
+	check_and_init.c\
 	utils.c\
-	philo.c
+	philo_lifes.c\
+	ft_atoi.c
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
